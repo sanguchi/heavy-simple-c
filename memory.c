@@ -1,24 +1,35 @@
 #include "types.c"
-#include "utils.h"
-struct integer ints[30];
-struct string strings[30];
-struct boolean bools[30];
+//#include "utils.h"
+#include <stdio.h>
 
-int exists(char *n)
+struct object list[20];
+int i = 0;
+
+void addToken(struct object t)
 {
-	for(int i = 0; i < sizeof(ints); i++)
-	{
-		if(equals(n, ints[i].name))
-			return i+1;
-	}
+	if(i > 19)
+		printf("MEMORY FULL");
+	list[i] = t;
+	i++;
+}
+struct integer t;
+char n[] = "testint";
+char ty[] = "INTEGER";
+
+struct object test;
+
+struct integer it;
+
+int main()
+{
+	int val = 15;
+	t.value = &val;
+	test.name = n;
+	test.type = ty;
+	test.value = &t;
+	printf("val = %i\n",*t.value);
+	it = *((struct integer *)&test.value);
+	int vv = *it.value;
+	printf("name = %s\ntype = %s\nvalue = %i\n", test.name, test.type, vv);
 	return 0;
-}
-void intDelete(int i)
-{
-	
-}
-void addInt(char *n, int v)
-{
-	//if(exists(n))
-		
 }

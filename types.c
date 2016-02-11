@@ -2,18 +2,24 @@
 #define TYPES_H 1
 typedef enum {true = 1, false = 0} state;
 
-struct integer{
-	char name[9];
-	int value;
+struct object{
+	char *name;
+	void *value;
+	char *type;
 };
 
 struct string{
-	char name[9];
-	char value[255];
+	char *value;
 };
 
+
+struct integer{
+	int *value;
+};
+
+
+
 struct boolean{
-	char name[9];
 	state value;
 };
 
@@ -23,7 +29,7 @@ struct config{
 };
 
 typedef struct {
-	struct type *t;
+	struct list *t;
 	int asize;
 	int maxSize;
 } array;

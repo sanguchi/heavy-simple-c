@@ -92,12 +92,12 @@ void cutstring(char *str, int eindx, char *target)
 {
 	if(eindx > size(str))
 	{
-		print("BEGIN INDEX IS GREATER THAN SIZE OF STRING");
+		print("END INDEX IS GREATER THAN SIZE OF STRING");
 		return;
 	}
 	if(eindx < 0)
 	{
-		print("BEGIN INDEX CAN'T BE LESS THAN ZERO");
+		print("END INDEX CAN'T BE LESS THAN ZERO");
 		return;
 	}
 	if(!sameSize(str, target))
@@ -113,6 +113,32 @@ void cutstring(char *str, int eindx, char *target)
 	
 	target[i] = '\0';
 }
+
+void rcutString(char *orig, int bindx, char *target)
+{
+	if(bindx > size(orig))
+	{
+		print("BEGIN INDEX IS GREATER THAN SIZE OF STRING");
+		return;
+	}
+	if(bindx < 0)
+	{
+		print("BEGIN INDEX CAN'T BE LESS THAN ZERO");
+		return;
+	}
+	if(!sameSize(orig, target))
+	{
+		print("TARGET STRING SIZE MUST BE EQUAL TO ORIGIN STRING");
+		return;
+	}
+	int i = 0;
+	for(; bindx + i < size(orig); i++)
+	{
+		target[i] = orig[bindx + i];
+	}
+	target[i] = '\0';
+}
+
 void cloneString(char *orig, char *targ)
 {
 	if(sizeof orig != sizeof targ)
@@ -131,6 +157,7 @@ void cloneString(char *orig, char *targ)
 
 void substring(char *orig, int bindx, int eindx, char *target)
 {
+	printf("args = %s,%i,%i,%s\n", orig, bindx, eindx, target);
 	if(sizeof orig != sizeof target)
 	{
 		print("SIZE OF ORIGIN AND TARGET STRING MUST BE EQUALS");
@@ -156,7 +183,7 @@ void substring(char *orig, int bindx, int eindx, char *target)
 	int i = 0;
 	for(;bindx + i < eindx; i++)
 	{
-		//printf("Copying %c to target at index %i\n", orig[bindx+i], i);
+		printf("Copying %c to target at index %i\n", orig[bindx+i], i);
 		target[i] = orig[bindx+i];
 	}
 	target[i] = '\0';
@@ -183,4 +210,16 @@ char * toUpperCase(char *s)
 		s[i] = toupper(s[i]);
 	}
 	return s;
+}
+
+int indexOf(char *source, char target)
+{
+	for(int i = 0; i < size(source); i++)
+	{
+		if(source[i] == target)
+		{
+			return i;
+		}
+	}
+	return -1;
 }

@@ -24,18 +24,17 @@ void parse(char *line)
 		return;
 	}
 	//line syntax =  <TYPE> <NAME> = EXPR
-	//char build[255];
-	char name[9];
-	char type[9];
+	char name[255];
+	char type[255];
+	char expr[255];
 	int i = 0;
-	
 	if(!isLetter(line[i])){
 		printf("LETTER EXPECTED, NOT %c\n", line[i]);
 		return;
 	}
 	//current char to analyze.
 	char c = line[i];
-	while(i < size(line) && isLetter(c))
+	while(i <= size(line) && isLetter(c))
 	{
 		c = line[i];
 		i++;
@@ -65,18 +64,47 @@ void parse(char *line)
 		return;
 	}
 	//advance over name's letters.
-	int ii = 0;
-	ii = i;
-	printf("ii = %i, i = %i\n", ii, i);
-	while(i < size(line) && isLetter(c))
+	//printf("starting letters at %i\n", i);
+	int r = 0;
+	while(i < size(line))
 	{
 		c = line[i];
+		if(!isLetter(c))
+			break;
 		i++;
+		r++;
 	}
-	printf("ii = %i, i = %i\n", ii, i);
-	printf("call substring with parameters : BINDX = %i, EINDX = %i\n",ii , i);
-	//here we obtain the type.
+	//here we obtain the name.
 	cloneString(line, name);
-	substring(line, ii, i, name);
+	cutstring(line, i,name);
+	//printf("cutstring to name: %s\n", name);
+	char temp[255];
+	cloneString(name, temp);
+	rcutString(temp,i - r, name);
+	if(size(name) > 7){
+		print("NAME SIZE MUST BE LESS THAN 8 CHARACTERS");
+		printf("ACTUAL SIZE = %i\n", size(name));
+		printf("NAME = [%s]\n", name);
+		return;
+	}
+	
+	//now we have the name, we'll obtain the expression. but first, we must search the '=' sign.
+	while(isSpace(line[i]))
+		i++;
+	if(line[i] != '='){
+		print("CHARACTER '=' BEFORE NAME");
+		return;
+	}
+	i++;
+	while(isSpace(line[i]))
+		i++;
+	if(i >= size(line)){
+		print("EXPRESSION EXPECTED BEFORE '='");
+		return;
+	}
+	cloneString(line , expr);
+	rcutString(line, i, expr);
+	printf("TYPE = [%s]\n", type);
 	printf("NAME = [%s]\n", name);
+	printf("EXPR = [%s]\n", expr);
 }

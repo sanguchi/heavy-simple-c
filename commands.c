@@ -74,3 +74,18 @@ void runCommand(char *com)
 		running = 0;
 }
 
+int containRefs(char *s)
+{
+	for(int i = 0; i < size(s); i++)
+	{
+		if(s[i] == '$')
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void solveRefs(char *r)
+{
+	

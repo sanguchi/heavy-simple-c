@@ -13,4 +13,6 @@ int isExecutableType(char *line);
 
 int isValidType(char *line);
 
+int containRefs(char *s);
+
 #endif

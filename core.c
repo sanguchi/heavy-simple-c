@@ -7,6 +7,7 @@
 int running;
 int lines;
 
+
 void interpreter()
 {	
 	print("INTERPRETER MODE. COMMANDS: [HELP, LIST, CLEAR, EXIT]");

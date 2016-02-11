@@ -21,6 +21,8 @@ int size(char *str);
 
 void cutstring(char *str, int eindx, char *target);
 
+void rcutString(char *orig, int bindx, char *target);
+
 void cloneString(char *orig, char *targ);
 
 void substring(char *orig, int bindx, int eindx, char *target);
@@ -28,5 +30,7 @@ void substring(char *orig, int bindx, int eindx, char *target);
 int equals(char *a, char *b);
 
 char * toUpperCase(char *s);
+
+int indexOf(char *source, char target);
 
 #endif
